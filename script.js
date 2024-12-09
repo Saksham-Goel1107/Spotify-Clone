@@ -7,29 +7,31 @@ let currFolder;
 // Fetch songs from a specific folder
 async function getsongs(folder) {
   currFolder = folder;
-  let a = await fetch(`/${folder}/`);
-  let response = await a.text();
 
-  let div = document.createElement("div");
-  div.innerHTML = response;
-  let as = div.getElementsByTagName("a");
-  songs = []; // Reset the songs array to ensure it's always initialized as an empty array
-
-  // Populate the songs array
-  for (let index = 0; index < as.length; index++) {
-    const element = as[index];
-    if (element.href.endsWith(".mp3")) {
-      songs.push(`/${currFolder}/${element.href.split(`/${currFolder}/`)[1]}`);
+  try {
+    // Fetch the playlist JSON file
+    let response = await fetch(`/${folder}/playlist.json`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch playlist.json");
     }
-  }
 
-  // If no songs are found, log an error and return an empty array.
-  if (songs.length === 0) {
-    console.error("No songs found in the folder.");
-    return [];
-  }
+    // Parse the JSON file
+    let data = await response.json();
+    songs = data.map((song) => `/${currFolder}/${song}`); // Create full paths
 
-  // Render the songs list on the page
+    if (songs.length === 0) {
+      console.error("No songs found in the playlist.");
+      return [];
+    }
+
+    // Render songs in the UI
+    renderSongs();
+  } catch (error) {
+    console.error("Error fetching songs:", error.message);
+  }
+}
+
+function renderSongs() {
   let songUL = document.querySelector(".songList").getElementsByTagName("ol")[0];
   songUL.innerHTML = "";
 
@@ -48,18 +50,19 @@ async function getsongs(folder) {
       </div>`;
   }
 
-  // Add click event listeners to each song item
+  // Add click event listeners to songs
   Array.from(document.querySelector(".songList").querySelectorAll(".songInfo")).forEach((e) => {
     e.addEventListener("click", () => {
       const track = e.querySelector(".info").firstElementChild.innerHTML.trim();
-      songIndex = songs.findIndex((song) => song.split("/").pop() === track); // Fix: Compare only the file name
+      songIndex = songs.findIndex((song) => song.split("/").pop() === track); // Compare file names
       if (songIndex !== -1) {
         playMusic(songs[songIndex]);
-        resetLoopIcon(); // Reset loop icon whenever a new song is selected
+        resetLoopIcon(); // Reset loop icon when a new song is selected
       }
     });
   });
 }
+
 
 document.addEventListener("contextmenu", (e) => {
   e.preventDefault(); // Prevent the default context menu from opening
