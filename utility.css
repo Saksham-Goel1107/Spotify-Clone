@@ -1,0 +1,57 @@
+.flex{
+    display: flex;
+}
+
+.margin{
+
+    margin:3px;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.item-center{
+    align-items: center;
+}
+
+.bg-black{
+    background-color: rgb(18,18,18);
+    border-radius: 6px;
+}
+
+.p-1{
+    padding: 15px;
+}
+
+.m-1{
+    margin: 8px 0;
+}
+
+.weight{
+    font-weight: 700;
+}
+
+.size-1{
+    font-size: 16px;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.invert{
+    filter: invert(1);
+}
+
+.space-around{
+    justify-content: space-around;
+}
+
+.white{
+    color: white;
+}
+
+.context{
+    cursor: context-menu;
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="This is a Clone of Spotify made by Saksham Goel to test Web devlopment skills" />
+  <title>Spotify - Web Player: Music for everyone</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="utility.css" />
+</head>
+
+<body>
+  <div class="container flex">
+    <div class="left">
+      <div class="home bg-black p-1">
+        <div class="logo pointer flex">
+          <img src="logo.svg" alt="logo" />
+          <img class="pointer cross" onclick="goleft()" src="cross.svg" alt="cross" />
+        </div>
+        <ul>
+          <li>
+            <img class="pointer homeimg" src="home.svg" alt="home" /><span class="pointer">Home</span>
+          </li>
+          <li>
+            <img class="pointer search" src="search.svg" alt="search" /><span class="pointer">Search</span>
+          </li>
+        </ul>
+      </div>
+      <div class="library bg-black p-1 m-1">
+        <div class="yourlibrary flex">
+          <img class="pointer" src="library.svg" alt="library" />
+          <span class="weight size-1 pointer">Your Library</span>
+        </div>
+        <div class="songList">
+          <ol>
+            <div style="cursor: context-menu; pointer-events: none" class="songInfo flex">
+              <img class="invert" src="music.svg" alt="music" />
+              <div class="info">
+                <div>Song Name</div>
+                <div>Song Artist</div>
+              </div>
+              <div class="playNow flex justify-center item-center">
+                <span>Play Now</span>
+                <img class="invert" src="playbtn.svg" alt="" />
+              </div>
+            </div>
+          </ol>
+        </div>
+        <div class="footer">
+          <a href="https://www.spotify.com/in-en/legal/">Legal</a>
+          <a href="https://www.spotify.com/in-en/safetyandprivacy/">Safety & Privacy Center</a>
+          <a href="https://www.spotify.com/in-en/legal/privacy-policy/">Privacy Policy</a>
+          <a href="https://www.spotify.com/in-en/legal/cookies-policy/">Cookies</a>
+          <a href="https://www.spotify.com/in-en/legal/privacy-policy/#s3">About Ads</a>
+          <a href="https://www.spotify.com/in-en/accessibility/">Accessibility</a>
+        </div>
+      </div>
+    </div>
+    <div class="right margin bg-black">
+      <div class="header flex">
+        <div class="nav flex">
+          <div class="hamburger pointer" onclick="left()">
+            <img src="hamburger.svg" alt="hamburger" />
+          </div>
+          <img class="pointer" src="right.svg" alt="right arrow" />
+          <img class="pointer" src="left.svg" alt="left arrow" />
+        </div>
+        <div class="buttons">
+          <button class="signup pointer weight size-1">Sign up</button>
+          <button class="login pointer weight size-1">Log in</button>
+        </div>
+      </div>
+      <div class="spotifyPlaylist">
+        <span class="pointer">Spotify Playlists</span>
+        <div class="cardContainer">
+          <div class="card" data-folder="first">
+            <div class="play"><img src="play.svg" alt="play" /></div>
+            <img src="playlist.jpeg" alt="playlist" /><br />
+            <p>
+              The most interesting tracks in the current world of pop music.
+            </p>
+          </div>
+          <div class="card" data-folder="second">
+            <div class="play"><img src="play.svg" alt="play" /></div>
+            <img src="playlist2.jpg" alt="playlist" /><br />
+            <p>
+              The most streamed artists of 2024. Cover: Taylor Swift
+            </p>
+          </div>
+          <div class="card" data-folder="third">
+            <div class="play"><img src="play.svg" alt="play" /></div>
+            <img src="playlist3.jpg" alt="playlist" /><br />
+            <p>
+              Our editors' top picks for the best Jazz songs of the year. Cover: Keyon Harrold
+            </p>
+          </div>
+          <div class="card" data-folder="fourth">
+            <div class="play"><img src="play.svg" alt="play" /></div>
+            <img src="playlist4.jpg" alt="playlist" /><br />
+            <p>
+              Our editors' picks for the best hit songs of the year. Cover: Charli XCX
+            </p>
+          </div>
+          <div class="card">
+            <div class="play"><img src="play.svg" alt="play" /></div>
+            <img src="playlist5.jpg" alt="playlist" /><br />
+            <p>
+              Our editors' picks for the best Folk & Americana songs this year. Cover: Jessica Pratt
+            </p>
+          </div>
+          <div class="card">
+            <div class="play"><img src="play.svg" alt="play" /></div>
+            <img src="playlist6.jpg" alt="playlist" /><br />
+            <p>
+              With Sachin-Jigar, Vishal-Shekhar, Atif Aslam and more
+            </p>
+          </div>
+          <div class="card">
+            <div class="play"><img src="play.svg" alt="play" /></div>
+            <img src="playlist7.jpg" alt="playlist" /><br />
+            <p>
+              With Karan Aujla, Shubh, Sidhu Moose Wala and more
+            </p>
+          </div>
+          <div class="card">
+            <div class="play"><img src="play.svg" alt="play" /></div>
+            <img src="playlist8.jpg" alt="playlist" /><br />
+            <p>
+              With Pritam, Mohit Chauhan, Atif Aslam and more
+            </p>
+          </div>
+          <div class="card">
+            <div class="play"><img src="play.svg" alt="play" /></div>
+            <img src="playlist9.jpg" alt="playlist" /><br />
+            <p>
+              With Vishal-Shekhar, A.R. Rahman, Atif Aslam and more
+            </p>
+          </div>
+          <div class="card">
+            <div class="play"><img src="play.svg" alt="play" /></div>
+            <img src="playlist10.jpg" alt="playlist" /><br />
+            <p>
+              With Anirudh Ravichander, Harris Jayaraj, Yuvan Shankar Raja and more
+            </p>
+          </div>
+          <div class="card">
+            <div class="play"><img src="play.svg" alt="play" /></div>
+            <img src="playlist11.jpg" alt="playlist" /><br />
+            <p>
+              Spotify Singles releases in 2024. Cover: mgk.
+            </p>
+          </div>
+          <div class="card">
+            <div class="play"><img src="play.svg" alt="play" /></div>
+            <img src="playlist12.jpg" alt="playlist" /><br />
+            <p>
+              Our editors' picks for the best Folk & Americana songs this year. Cover: Jessica Pratt
+            </p>
+          </div>
+        </div>
+        <div class="playBar">
+          <div class="songBtn">
+            <div class="songName context"></div>
+            <div class="btn">
+              <img class="pointer previousbtn" src="previous.svg" alt="previousbtn" />
+              <img id="play" class="pointer" src="playbtn.svg" alt="playbtn" />
+              <img class="pointer nextbtn" src="next.svg" alt="nextbtn" />
+            </div>
+            <div class="tl flex justify-center item-center">
+              
+
+              <div class="songTime context"></div>
+              <img class="loop pointer" src="loop.svg" alt="loop" />
+              <img class="pointer volumeimg" src="volume.svg" alt="volume" />
+              <input class="volumerange pointer"
+                type="range" name="volume" />
+            </div>
+          </div>
+
+          <div class="seekBar pointer">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
