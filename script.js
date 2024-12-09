@@ -31,10 +31,9 @@ async function getsongs(folder) {
   }
 }
 
-
 // Render songs in the song list
 function renderSongs() {
-  let songUL = document.querySelector(".songList").getElementsByTagName("ol")[0];
+  const songUL = document.querySelector(".songList").getElementsByTagName("ol")[0];
   songUL.innerHTML = "";
 
   for (const song of songs) {
@@ -69,7 +68,7 @@ function renderSongs() {
 const playMusic = (track, pause = false) => {
   if (pause) {
     currentSong.pause();
-    play.src = "playbtn.svg";
+    document.querySelector(".playbtn").src = "playbtn.svg";
     return;
   }
 
@@ -81,7 +80,7 @@ const playMusic = (track, pause = false) => {
   currentSong.src = track;
   currentSong.play();
   currentSong.loop = false; // Disable looping for the current song (unless explicitly set)
-  play.src = "pause.svg";
+  document.querySelector(".playbtn").src = "pause.svg";
 
   document.querySelector(".songName").innerHTML = track.replace(`/${currFolder}/`, " ");
   document.querySelector(".songTime").innerHTML = "00:00/00:00";
@@ -106,13 +105,13 @@ async function main() {
     document.querySelector(".songName").innerHTML =
       songs[0].split(`/${currFolder}/`)[1]; // Display the song name
     document.querySelector(".songTime").innerHTML = "00:00/00:00"; // Display initial time
-    play.src = "playbtn.svg"; // Set play button to "play" state initially
+    document.querySelector(".playbtn").src = "playbtn.svg"; // Set play button to "play" state initially
   } else {
     console.error("No songs available to play.");
     return; // Exit if there are no songs to play
   }
 
-  play.addEventListener("click", () => {
+  document.querySelector(".playbtn").addEventListener("click", () => {
     if (isFirstPlay) {
       if (songs.length > 0) {
         playMusic(songs[songIndex]);
@@ -121,10 +120,10 @@ async function main() {
     } else {
       if (currentSong.paused) {
         currentSong.play();
-        play.src = "pause.svg";
+        document.querySelector(".playbtn").src = "pause.svg";
       } else {
         currentSong.pause();
-        play.src = "playbtn.svg";
+        document.querySelector(".playbtn").src = "playbtn.svg";
       }
     }
   });
@@ -223,7 +222,7 @@ document.querySelector(".volumerange").addEventListener("input", (e) => {
 });
 
 Array.from(document.getElementsByClassName("card")).forEach(e => {
-  e.addEventListener("click", async items => {
+  e.addEventListener("click", async (items) => {
     const folder = items.currentTarget.dataset.folder;
     
     await getsongs(`songs/${folder}`);
