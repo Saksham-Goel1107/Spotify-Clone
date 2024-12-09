@@ -10,14 +10,14 @@ async function getsongs(folder) {
 
   try {
     // Fetch the playlist JSON file
-    let response = await fetch(`/${folder}/playlist.json`);
+    let response = await fetch(`https://saksham-goel1107.github.io/songs/${folder}/playlist.json`);
     if (!response.ok) {
       throw new Error("Failed to fetch playlist.json");
     }
 
     // Parse the JSON file
     let data = await response.json();
-    songs = data.map((song) => `/${currFolder}/${song}`); // Create full paths
+    songs = data.map((song) => `https://saksham-goel1107.github.io/songs/${folder}/${song}`); // Use full URL paths
 
     if (songs.length === 0) {
       console.error("No songs found in the playlist.");
@@ -30,6 +30,7 @@ async function getsongs(folder) {
     console.error("Error fetching songs:", error.message);
   }
 }
+
 
 function renderSongs() {
   let songUL = document.querySelector(".songList").getElementsByTagName("ol")[0];
