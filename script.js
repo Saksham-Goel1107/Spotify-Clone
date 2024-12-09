@@ -9,11 +9,11 @@ async function getsongs(folder) {
   currFolder = folder;
   const playlistUrl = `https://raw.githubusercontent.com/saksham-goel1107/songs/main/${currFolder}/playlist.json`;
   console.log("Fetching playlist from URL:", playlistUrl);  // Print the URL to debug
-  
+
   try {
     let response = await fetch(playlistUrl);
     if (!response.ok) {
-      throw new Error("Failed to fetch playlist.json");
+      throw new Error("Failed to fetch playlist.json: " + response.statusText);
     }
 
     let data = await response.json();
@@ -30,6 +30,7 @@ async function getsongs(folder) {
     console.error("Error fetching songs:", error.message);
   }
 }
+
 
 // Render songs in the song list
 function renderSongs() {
