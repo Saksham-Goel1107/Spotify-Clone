@@ -9,19 +9,22 @@ async function getsongs(folder) {
   currFolder = folder;
 
   try {
-    // Correct the URL to fetch playlist.json from the raw content on GitHub
-    let response = await fetch(`https://raw.githubusercontent.com/saksham-goel1107/Spotify-Clone/main/${folder}/playlist.json`);
+    // Fetch the playlist JSON file
+    let response = await fetch(`https://raw.githubusercontent.com/saksham-goel1107/songs/main/songs/first/playlist.json`);
     if (!response.ok) {
       throw new Error("Failed to fetch playlist.json");
     }
 
     // Parse the JSON file
     let data = await response.json();
-    songs = data.map((song) => `https://raw.githubusercontent.com/saksham-goel1107/Spotify-Clone/main/${folder}/${song}`); // Create full paths
+    
+    console.log("Fetched playlist data:", data);  // Log the fetched data
+
+    songs = data.map((song) => `/${currFolder}/${song}`); // Create full paths
 
     if (songs.length === 0) {
       console.error("No songs found in the playlist.");
-      return [];
+      return []; // Ensure this case is handled properly
     }
 
     // Render songs in the UI
@@ -30,6 +33,7 @@ async function getsongs(folder) {
     console.error("Error fetching songs:", error.message);
   }
 }
+
 
 function renderSongs() {
   let songUL = document.querySelector(".songList").getElementsByTagName("ol")[0];
