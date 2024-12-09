@@ -18,20 +18,14 @@ async function getsongs(folder) {
 
     let data = await response.json();
     console.log("Fetched playlist data:", data);
+    songs = data.map((song) => `/${currFolder}/${song}`);
 
-    if (Array.isArray(data) && data.length > 0) {
-      songs = data.map((song) => `https://raw.githubusercontent.com/saksham-goel1107/songs/main/${currFolder}/${song}`);
-      
-      if (songs.length === 0) {
-        console.error("No songs found in the playlist.");
-        return [];
-      }
-
-      renderSongs(); // Render songs after fetching
-    } else {
-      console.error("Invalid playlist format.");
+    if (songs.length === 0) {
+      console.error("No songs found in the playlist.");
       return [];
     }
+
+    renderSongs();
   } catch (error) {
     console.error("Error fetching songs:", error.message);
   }
@@ -40,11 +34,11 @@ async function getsongs(folder) {
 // Render songs in the song list
 function renderSongs() {
   const songUL = document.querySelector(".songList").getElementsByTagName("ol")[0];
-  songUL.innerHTML = ""; // Clear existing song list
+  songUL.innerHTML = "";
 
   for (const song of songs) {
     songUL.innerHTML += `
-      <li class="songInfo flex pointer">
+      <div class="songInfo flex pointer">
         <img class="invert" src="music.svg" alt="music" />
         <div class="info">
           <div>${song.split(`/${currFolder}/`)[1]}</div>
@@ -52,9 +46,9 @@ function renderSongs() {
         </div>
         <div class="playNow flex justify-center item-center">
           <span>Play Now</span>
-          <img class="invert" src="playbtn.svg" alt="Play button">
+          <img class="invert" src="playbtn.svg" alt="">
         </div>
-      </li>`;
+      </div>`;
   }
 
   // Add click event listeners to songs
@@ -89,7 +83,7 @@ const playMusic = (track, pause = false) => {
   document.querySelector(".playbtn").src = "pause.svg";
 
   document.querySelector(".songName").innerHTML = track.replace(`/${currFolder}/`, " ");
-  document.querySelector(".songTime").innerHTML = "00:00/00:00"; // Initialize song time
+  document.querySelector(".songTime").innerHTML = "00:00/00:00";
 };
 
 // Convert seconds to minutes and seconds format
@@ -229,18 +223,26 @@ document.querySelector(".volumerange").addEventListener("input", (e) => {
 
 Array.from(document.getElementsByClassName("card")).forEach(e => {
   e.addEventListener("click", async (items) => {
-    let folder = items.target.classList.contains("first") ? "songs/first" : "songs/second";
-    await getsongs(folder); // Fetch songs based on the clicked folder
+    const folder = items.currentTarget.dataset.folder;
+    
+    await getsongs(`songs/${folder}`);
+    currentSong.loop = false; // Ensure loop is off when a new folder is loaded
+    resetLoopIcon(); // Reset the loop icon when a new folder is loaded
   });
 });
 
-// Reset loop icon to default state
+// Helper function to reset loop icon to inactive state
 function resetLoopIcon() {
-  document.querySelector(".loop").classList.remove("active");
-  currentSong.loop = false; // Disable looping by default after song change
+  const loopButton = document.querySelector(".loop");
+  loopButton.classList.remove("active"); // Remove active class to reset the loop icon
 }
 
-// Initialize the app
-document.addEventListener("DOMContentLoaded", async () => {
-  await main(); // Load the default playlist and initialize the player
-});
+function left() {
+  document.querySelector(".left").style.left = 0 + "%";
+}
+
+function goleft() {
+  document.querySelector(".left").style.left = -100 + "%";
+}
+
+main();
