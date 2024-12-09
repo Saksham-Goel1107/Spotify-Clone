@@ -63,7 +63,6 @@ function renderSongs() {
   });
 }
 
-
 document.addEventListener("contextmenu", (e) => {
   e.preventDefault(); // Prevent the default context menu from opening
 });
@@ -237,15 +236,14 @@ Array.from(document.getElementsByClassName("card")).forEach(e => {
 function resetLoopIcon() {
   const loopButton = document.querySelector(".loop");
   loopButton.classList.remove("active"); // Remove active class to reset the loop icon
-
-
 }
-  function left() {
-    document.querySelector(".left").style.left = 0+"%";
-  }
-  function goleft() {
-    document.querySelector(".left").style.left = -100 + "%";
-  }
 
+function left() {
+  document.querySelector(".left").style.left = 0 + "%";
+}
+
+function goleft() {
+  document.querySelector(".left").style.left = -100 + "%";
+}
 
 main();
