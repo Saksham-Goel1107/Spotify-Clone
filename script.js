@@ -7,7 +7,7 @@ let currFolder;
 // Fetch songs from a specific folder
 async function getsongs(folder) {
   currFolder = folder;
-  const playlistUrl = `https://raw.githubusercontent.com/saksham-goel1107/songs/main/${currFolder}/playlist.json`;
+  const playlistUrl = `https://raw.githubusercontent.com/saksham-goel1107/spotify-clone/main/songs/${currFolder}/playlist.json`;
   console.log("Fetching playlist from URL:", playlistUrl);  // Print the URL to debug
 
   try {
