@@ -7,7 +7,6 @@ let currFolder;
 // Fetch songs from a specific folder
 async function getsongs(folder) {
   currFolder = folder;
-
   const playlistUrl = `https://raw.githubusercontent.com/saksham-goel1107/songs/main/${currFolder}/playlist.json`;
   console.log("Fetching playlist from URL:", playlistUrl);  // Print the URL to debug
   
@@ -32,7 +31,7 @@ async function getsongs(folder) {
   }
 }
 
-
+// Render songs in the song list
 function renderSongs() {
   let songUL = document.querySelector(".songList").getElementsByTagName("ol")[0];
   songUL.innerHTML = "";
@@ -65,10 +64,7 @@ function renderSongs() {
   });
 }
 
-document.addEventListener("contextmenu", (e) => {
-  e.preventDefault(); // Prevent the default context menu from opening
-});
-
+// Play or pause music
 const playMusic = (track, pause = false) => {
   if (pause) {
     currentSong.pause();
@@ -90,6 +86,7 @@ const playMusic = (track, pause = false) => {
   document.querySelector(".songTime").innerHTML = "00:00/00:00";
 };
 
+// Convert seconds to minutes and seconds format
 function secondsToMinutes(seconds) {
   seconds = Math.floor(seconds);
   const minutes = Math.floor(seconds / 60);
@@ -102,7 +99,7 @@ function secondsToMinutes(seconds) {
 async function main() {
   await getsongs("songs/first");
 
-  // Check if songs is correctly populated before proceeding
+  // Check if songs are correctly populated before proceeding
   if (songs.length > 0) {
     currentSong.src = songs[0]; // Load first song but do not play yet
     document.querySelector(".songName").innerHTML =
