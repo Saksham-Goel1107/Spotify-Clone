@@ -34,7 +34,6 @@ async function getsongs(folder) {
   }
 }
 
-
 function renderSongs() {
   let songUL = document.querySelector(".songList").getElementsByTagName("ol")[0];
   songUL.innerHTML = "";
