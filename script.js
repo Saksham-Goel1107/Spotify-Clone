@@ -8,31 +8,30 @@ let currFolder;
 async function getsongs(folder) {
   currFolder = folder;
 
+  const playlistUrl = `https://raw.githubusercontent.com/saksham-goel1107/songs/main/${currFolder}/playlist.json`;
+  console.log("Fetching playlist from URL:", playlistUrl);  // Print the URL to debug
+  
   try {
-    // Fetch the playlist JSON file
-    let response = await fetch(`https://raw.githubusercontent.com/saksham-goel1107/songs/main/songs/first/playlist.json`);
+    let response = await fetch(playlistUrl);
     if (!response.ok) {
       throw new Error("Failed to fetch playlist.json");
     }
 
-    // Parse the JSON file
     let data = await response.json();
-    
-    console.log("Fetched playlist data:", data);  // Log the fetched data
-
-    songs = data.map((song) => `/${currFolder}/${song}`); // Create full paths
+    console.log("Fetched playlist data:", data);
+    songs = data.map((song) => `/${currFolder}/${song}`);
 
     if (songs.length === 0) {
       console.error("No songs found in the playlist.");
-      return []; // Ensure this case is handled properly
+      return [];
     }
 
-    // Render songs in the UI
     renderSongs();
   } catch (error) {
     console.error("Error fetching songs:", error.message);
   }
 }
+
 
 function renderSongs() {
   let songUL = document.querySelector(".songList").getElementsByTagName("ol")[0];
